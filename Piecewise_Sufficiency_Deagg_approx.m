@@ -1,14 +1,14 @@
 clr
 format long
-file = 'C:\Users\lakshd5\Dropbox\Bayesian_IM_selection\Accounting for heteroskedasticity\Final analysis 05_28_2016\Exact measure for sufficiency\Deaggregation\Hypothetical site\SaT1.33\deagg_';
-Hazard = importdata('C:\Users\lakshd5\Dropbox\Bayesian_IM_selection\Accounting for heteroskedasticity\Final analysis 05_28_2016\Exact measure for sufficiency\Hazard curves\Hazard curves with eps\SaT1.33.txt');
-beta = importdata('C:\Users\lakshd5\Dropbox\Bayesian_IM_selection\Accounting for heteroskedasticity\Final analysis 05_28_2016\Exact measure for sufficiency\Regression details_FEMA\Bilinear_Regression\RD\SaT1.33\beta.txt');
-beta_M = importdata('C:\Users\lakshd5\Dropbox\Bayesian_IM_selection\Accounting for heteroskedasticity\Final analysis 05_28_2016\Exact measure for sufficiency\Regression details_FEMA\Bilinear_Regression\RD\SaT1.33\beta_M.txt');
-beta_R = importdata('C:\Users\lakshd5\Dropbox\Bayesian_IM_selection\Accounting for heteroskedasticity\Final analysis 05_28_2016\Exact measure for sufficiency\Regression details_FEMA\Bilinear_Regression\RD\SaT1.33\beta_R.txt');
-beta_eps = importdata('C:\Users\lakshd5\Dropbox\Bayesian_IM_selection\Accounting for heteroskedasticity\Final analysis 05_28_2016\Exact measure for sufficiency\Regression details_FEMA\Bilinear_Regression\RD\SaT1.33\beta_eps.txt');
+file = 'C:\Users\lakshd5\Dropbox\Bayesian_IM_selection\Accounting for heteroskedasticity\Final analysis 05_28_2016\Exact measure for sufficiency and approximations\Deaggregation\Hypothetical site\PGV\deagg_';
+Hazard = importdata('C:\Users\lakshd5\Dropbox\Bayesian_IM_selection\Accounting for heteroskedasticity\Final analysis 05_28_2016\Exact measure for sufficiency and approximations\Hazard curves\Hazard curves with eps\PGV.txt');
+beta = importdata('C:\Users\lakshd5\Dropbox\Bayesian_IM_selection\Accounting for heteroskedasticity\Final analysis 05_28_2016\Exact measure for sufficiency and approximations\Regression details_Medina_Krawinkler\Bilinear_Regression\PFA4\PGV\beta.txt');
+beta_M = importdata('C:\Users\lakshd5\Dropbox\Bayesian_IM_selection\Accounting for heteroskedasticity\Final analysis 05_28_2016\Exact measure for sufficiency and approximations\Regression details_Medina_Krawinkler\Bilinear_Regression\PFA4\PGV\beta_M.txt');
+beta_R = importdata('C:\Users\lakshd5\Dropbox\Bayesian_IM_selection\Accounting for heteroskedasticity\Final analysis 05_28_2016\Exact measure for sufficiency and approximations\Regression details_Medina_Krawinkler\Bilinear_Regression\PFA4\PGV\beta_R.txt');
+beta_eps = importdata('C:\Users\lakshd5\Dropbox\Bayesian_IM_selection\Accounting for heteroskedasticity\Final analysis 05_28_2016\Exact measure for sufficiency and approximations\Regression details_Medina_Krawinkler\Bilinear_Regression\PFA4\PGV\beta_eps.txt');
 
-Dr = 0.005:0.005:0.04;
-IM = [0.01 1 2 3 4 5 6];
+Dr = 10:100:772;
+IM = [1 100 200 300 400 500 600];
 for ii = 1:max(size(IM))
 pga = IM(ii);
 fMRe = importdata(strcat(file,num2str(pga),'.txt'));
@@ -27,12 +27,12 @@ coeff_M(ii,:) = coeffvalues(fit(IM',Pm(ii,:)','exp2'));
 coeff_R(ii,:) = coeffvalues(fit(IM',Pr(ii,:)','exp2'));
 coeff_eps(ii,:) = coeffvalues(fit(IM',Pe(ii,:)','exp2'));
 end
-IM = 0.01:0.01:6;%%%%%%%%%%%%%%
-dIM = 0.01;
+IM = 1:1:600;%%%%%%%%%%%%%%
+dIM = 1;
 upper_index = 600;
 % Computations
-M = importdata('C:\Users\lakshd5\Dropbox\Bayesian_IM_selection\Accounting for heteroskedasticity\Final analysis 05_28_2016\Exact measure for sufficiency\M.txt');
-R = importdata('C:\Users\lakshd5\Dropbox\Bayesian_IM_selection\Accounting for heteroskedasticity\Final analysis 05_28_2016\Exact measure for sufficiency\R.txt');
+M = importdata('C:\Users\lakshd5\Dropbox\Bayesian_IM_selection\Accounting for heteroskedasticity\Final analysis 05_28_2016\Exact measure for sufficiency and approximations\M.txt');
+R = importdata('C:\Users\lakshd5\Dropbox\Bayesian_IM_selection\Accounting for heteroskedasticity\Final analysis 05_28_2016\Exact measure for sufficiency and approximations\R.txt');
 eps_max = 4;
 intervals = 20;
 eps_min = -eps_max;
@@ -99,4 +99,4 @@ KLD_R(KLD_R<0) = 0;
 KLD_M(KLD_M<0) = 0;
 KLD = KLD_M + KLD_R + KLD_eps;
 KLD = real(KLD);
-plot(IM,bayes,'red',IM,bayes_M,'blue',IM,bayes_R,'green',IM,bayes_eps,'linewidth',1.5)
+plot(Dr,KLD)

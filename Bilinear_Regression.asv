@@ -1,7 +1,7 @@
 %%
 clear all
 clc
-file_path  = 'C:\Users\lakshd5\Dropbox\Bayesian_IM_selection\Accounting for heteroskedasticity\Final analysis 05_28_2016\Medina Krawinkler records unscaled\PFA4\';
+file_path  = 'C:\Users\lakshd5\Dropbox\Bayesian_IM_selection\Accounting for heteroskedasticity\Final analysis 05_28_2016\Medina Krawinkler records unscaled\RD\';
 Sa = importdata(strcat(file_path,'x_pgv.txt'));
 eps = importdata('C:\Users\lakshd5\Dropbox\Bayesian_IM_selection\Accounting for heteroskedasticity\Final analysis 05_28_2016\Medina Krawinkler records unscaled\eps_pgv.txt');
 
@@ -21,6 +21,9 @@ beta_M = regress(log(Dr),X_M);
 beta_R = regress(log(Dr),X_R);
 beta_eps = regress(log(Dr),X_eps);
 beta_Vs = regress(log(Dr),X_Vs);
+regre
+
+
 res = log(Dr)-(beta(1)+beta(2)*log(Sa));
 res_M = log(Dr)-(beta_M(1)+beta_M(2)*log(Sa)+beta_M(3)*M);
 res_R = log(Dr)-(beta_R(1)+beta_R(2)*log(Sa)+beta_R(3)*R);

@@ -1,7 +1,7 @@
 clr
-file = 'C:\Users\lakshd5\Dropbox\Bayesian_IM_selection\Accounting for heteroskedasticity\Final analysis 05_28_2016\Exact measure for sufficiency\Deaggregation\Hypothetical site\SaT1.33\deagg_';
-IM = [0.01 1 2 3 4 5 6];
-index = 15;
+file = 'C:\Users\lakshd5\Dropbox\Bayesian_IM_selection\Accounting for heteroskedasticity\Final analysis 05_28_2016\Exact measure for sufficiency and approximations\Deaggregation\Hypothetical site\PGV\deagg_';
+IM = [1 100 200 300 400 500 600];
+index = 1:20;
 for ss = 1:max(size(index))
 for ii = 1:max(size(IM))
 pga = IM(ii);
@@ -16,7 +16,7 @@ end
  Pr(ii) = fR(index(ss));
  Pe(ii) = fe(index(ss));
 end
-IM1 = 0.01:0.01:6;
+IM1 = 1:600;
 % fit_type = fittype( @(a,b,c,d,x) a*exp(b*x)+c*exp(d*x),'independent','x');
 coeff_M = coeffvalues(fit(IM',Pm','exp2'));
 coeff_R = coeffvalues(fit(IM',Pr','exp2'));
@@ -49,23 +49,23 @@ ylabel('Bin number')
 zlabel('Probability')
 legend('Approximate','Exact')
 title('Magnitude')
-% figure(2)
-% h = surf(xx',yy',Pr_approx);
-% set(h,'LineStyle','none')
-% hold on
-% plot3(xx',yy',Pr1,['o','red'])
-% xlabel('IM (g)')
-% ylabel('Bin number')
-% zlabel('Probability')
-% legend('Approximate','Exact')
-% title('Distance')
-% figure(3)
-% h = surf(xx',yy',Pe_approx);
-% set(h,'LineStyle','none')
-% hold on
-% plot3(xx',yy',Pe1,['o','red'])
-% xlabel('IM (g)')
-% ylabel('Bin number')
-% zlabel('Probability')
-% legend('Approximate','Exact')
-% title('Epsilon')
+figure(2)
+h = surf(xx',yy',Pr_approx);
+set(h,'LineStyle','none')
+hold on
+plot3(xx',yy',Pr1,['o','red'])
+xlabel('IM (g)')
+ylabel('Bin number')
+zlabel('Probability')
+legend('Approximate','Exact')
+title('Distance')
+figure(3)
+h = surf(xx',yy',Pe_approx);
+set(h,'LineStyle','none')
+hold on
+plot3(xx',yy',Pe1,['o','red'])
+xlabel('IM (g)')
+ylabel('Bin number')
+zlabel('Probability')
+legend('Approximate','Exact')
+title('Epsilon')

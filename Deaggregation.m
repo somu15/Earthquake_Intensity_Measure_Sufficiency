@@ -1,4 +1,5 @@
 function [] = Deaggregation (input_IMs,sno,Tp,fault_type,Vs,file)
+global BA08_check
 for value = 1:max(size(input_IMs))
 format long
 Y = input_IMs(value);
@@ -16,7 +17,6 @@ lambda = 10^(2-0.8*3);
 intervals = 20;
 eps_max = 4;
 eps_min = -eps_max;
-global BA08_check
 BA08_check = 1;
 deps = (eps_max-eps_min)/(intervals-1);
 eps = eps_min:deps:eps_max;
